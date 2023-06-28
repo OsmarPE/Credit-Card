@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card{
+    transform: translateY(-50%);
+}
+
+.card__front{
+    transform:  rotateY(0deg);
+}
+.card__back, .card__front{
+    transition: all 0.4s ease;
+}
+
+.card__back{
+    transform:  rotateY(180deg);
+
+}
+.card.active .card__front{
+    transform:  rotateY(180deg);
+}
+.card.active .card__back{
+    transform:  rotateY(360deg);
+}
