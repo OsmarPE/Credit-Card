@@ -2,7 +2,7 @@ import {typeProps} from '../types'
 
 function ItemForm({nameItem,placeholder,label,maxLength,setValues,rotate,setRotate}:typeProps):JSX.Element {
 
-  function setRotateCard(e:React.FocusEvent<HTMLInputElement>) {
+  function setRotateCard(e:React.FocusEvent<HTMLInputElement>):void {
       if (e.target.name !== 'cvv') return
       setRotate(!rotate)
       

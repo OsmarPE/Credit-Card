@@ -2,8 +2,8 @@
 function Visa({props}:any) {
   return (
     <svg
+    className="w-[70px] sm:w-[90px]"
       xmlns="http://www.w3.org/2000/svg"
-      width="90"
       height="29"
       viewBox="0 0 97 31"
       {...props}
