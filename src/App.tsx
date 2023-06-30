@@ -6,7 +6,9 @@ import { typeCard } from './types'
 
 function App() {
 
-  const [rotate, setRotate] = useState(false)
+  const [rotate, setRotate] = useState<boolean>(false)
+  const [mensaje, setmensaje] = useState<string>('')
+  const [showMensaje, setshowMensaje] = useState<boolean>(false)
   const [cardObj, setCardObj] = useState<typeCard>({
     name: '',
     cardNumber: '',
@@ -50,7 +52,31 @@ function App() {
 
 
 
+  function HanledSumit(e: React.FormEvent<HTMLFormElement>): void {
+      e.preventDefault()
+
+      const {cardNumber,cvv,month,name,year} = cardObj
+
+      if ([cardNumber,cvv,month,name,year].includes('')) {
+        setmensaje('Llenar los Campos Correspondientes')
+        
+      }else{
+        setmensaje('Se Agrego Correctante')
+      }
+      setshowMensaje(true)
+      
+      setTimeout(() => {
+        setshowMensaje(false)
+        setTimeout(() => {
+          setmensaje('')
+          
+        }, 1000);
+        
+      }, 2000);
+  }
+
   return (
+    <>
     <main className='w-11/12 box-border max-w-[500px] p-6 sm:p-10  pt-[120px] sm:pt-[130px] translate-y-[56px] rounded-[10px] bg-white shadow-100 relative'>
       <div style={{ perspective: '1000px' }} className={`card absolute transition-all duration-500 perps top-0 left-0 right-0 w-[86%] mx-auto  h-[12rem] sm:h-[14rem] ${rotate ? 'active' : ''}`}>
         <section style={{ backfaceVisibility: 'hidden' }} className='card__front absolute shadow-300 p-6 inset-0 text-white rounded-lg flex flex-col justify-between  bg-gradient-to-br from-blue-300 to-blue-400 '>
@@ -71,7 +97,7 @@ function App() {
           </div>
         </section>
       </div>
-      <form action="#">
+      <form action="#" onSubmit={HanledSumit}>
         <div className="form__item mb-4">
           <ItemForm label='Cardholder Name' nameItem='name' maxLength={40} placeholder='Mario Castañeda' setValues={setValues} rotate={rotate} setRotate={setRotate} />
         </div>
@@ -94,7 +120,12 @@ function App() {
         </div>
         <input className='cursor-pointer transition-all outline-none duration-500 hover:opacity-80 uppercase tracking-widest h-[50px] shadow-200 text-center w-full bg-gradient-to-r from-blue-300 to-blue-400 rounded-lg text-white font-semibold' type="submit" value="Submit" />
       </form>
+ 
     </main>
+    <article className={`menssage absolute inset-0 top-auto py-3 transition-all duration-500 ${ showMensaje ? 'translate-y-0 opacity-1' : 'translate-y-full opacity-0' } bg-blue-400 text-white text-center`}>
+        <p className='menssage__title'>{mensaje}</p>
+    </article>
+    </>
   )
 }
 
